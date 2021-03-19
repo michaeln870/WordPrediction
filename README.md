@@ -2,10 +2,10 @@
 
 This project aims at building a word prediction model able to intelligently suggest the next word that the user is most likely to type, similar to the SwiftKey keyboard phone application.
 
-Prototype application: https://michaeln870.shinyapps.io/WordPrediction/
+**Prototype application**: https://michaeln870.shinyapps.io/WordPrediction/
 
 For more detailed information about the project, look at the:
-- `Milestone-Report.md`: Report for part 1 of project (includes detail on data, data preparation and exploratory data analysis)  
+- `Milestone-Report.md`: Report for part 1 of the project. It describes the data used, steps for data preparation and some exploratory data analysis.
 - `Creating ngrams.ipynb`: R Codes using Sparklyr package to clean and transform a large text corpus on a Spark cluster.
 
 This project is still a work in progress.  
