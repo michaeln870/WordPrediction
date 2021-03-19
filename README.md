@@ -1,17 +1,20 @@
-# WordPrediction
-Capstone Project
+# Capstone Project: Word Prediction
 
-**Work in progress**
+This project aims at building a word prediction model able to intelligently suggest the next word that the user is most likely to type, similar to the SwiftKey keyboard phone application.
 
+**Prototype application**: https://michaeln870.shinyapps.io/WordPrediction/
+
+For more detailed information about the project, look at the:
+- `Milestone-Report.md`: Report for part 1 of the project. It describes the data used, steps for data preparation and some exploratory data analysis.
+- `Creating ngrams.ipynb`: R Codes using Sparklyr package to clean and transform a large text corpus on a Spark cluster.
+
+This project is still a work in progress.  
 Expected completion: before the end of March
 
-I'm sorry, I was so excited to apply for jobs and was afraid to be too late for summer interships that I didn't have time to finish this project. I still wanted to show off what I can do in the likelihood that I finish it before anyone sees this.
-
-In the mean time, you can look at `Creating ngrams.ipynb` notebook to look at my initial work, where I used the Sparklyr package in R to clean and transform a large corpus.
-
-Next I need to:
-- Implement a scoring algorithm (Stupid Backoff, or other) that will predict words
-- Implement the algorithm into a Shiny app
+To do next:
+- Implement a scoring model (Stupid Backoff, ...)
+- Build a system to display more suggestions based on scores
+- Improve UI and add features
 - Test and optimize
 
 I'll be updating the repository regularly until the project is completed.
