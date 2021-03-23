@@ -1,17 +1,16 @@
-# Capstone Project: Word Prediction Application
+# Capstone Project: Next Word Prediction Application
 
-This project is a simple word prediction model that has been able to suggest words when someone is typing. A "Stupid Backoff" model is used to predict words based on a corpus of english text from HC Corpora.
+The goal of this project was the demonstrate the ability to build a next word prediction web application. It is part of the Johns Hopkins University's Data Science Specialization on Coursera.
 
-Application: https://michaeln870.shinyapps.io/WordPrediction/
+### The Application:
 
-For more detailed information about the project, look at the:
-- `Milestone-Report.md`: Report for part 1 of the project. It describes the data used, steps for data preparation and some exploratory data analysis.
-- `Creating ngrams.ipynb`: R Codes using Sparklyr package to clean and transform a large text corpus on a Spark cluster.
+https://michaeln870.shinyapps.io/WordPrediction/
 
-I'm still currently working on the project. I'll be updating the repository regularly until the project is fully completed.
+### About the model:
 
-To do next:
-- Implement different models (Maximum Likelihood Estimate, Katz Backoff, ...)
-- Improve UI and add features
+The model has been built using a large corpus of more than 4 million lines of text with a total word count of over 102 millions. The corpus has been cleaned and transformed into n-grams up to the fifth order (5-grams). The resulting model is composed of a corpus of more than 15 million n-grams, not accounting for unigrams. The algorithm used to predict the next word is based on the "Stupid Backoff" method.
 
-
+### For more detailed information about the project:
+- `Milestone-Report.md`: Report for the first part of the project. It describes the data used, steps for data preparation and some exploratory data analysis.
+- `generating ngrams.ipynb`: R Codes (sparklyr package) to clean and transform a large text corpus into n-grams. Ran on a Spark cluster.
+- `App` folder: R codes to run the application, includes algorithm used to predict next word in `functions.R`
