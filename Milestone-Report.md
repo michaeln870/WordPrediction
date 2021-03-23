@@ -98,13 +98,13 @@ Another way to represent them is to draw them into networks that shows the relat
 
 
 
-![](Milestone-Report_files/figure-html/bigrams network-1.png)<!-- -->
+<img src="Milestone-Report_files/figure-html/bigrams network-1.png" />
 
-![](Milestone-Report_files/figure-html/trigrams network-1.png)<!-- -->
+<img src="Milestone-Report_files/figure-html/trigrams network-1.png" />
 
-![](Milestone-Report_files/figure-html/fourgrams network-1.png)<!-- -->
+<img src="Milestone-Report_files/figure-html/fourgrams network-1.png" />
 
-![](Milestone-Report_files/figure-html/fivegrams network-1.png)<!-- -->
+<img src="Milestone-Report_files/figure-html/fivegrams network-1.png" />
 
 While it is difficult to observe, similarly to the word count, we see with the network diagrams that smaller n-grams have most common words pointing at each other and that there is not many meaningful sentences that can be made from that, but as we increase the size of the n-grams, sequences of words start converging onto a single word. This means that as the n-gram increases, the model starts detecting common phrases.
 
