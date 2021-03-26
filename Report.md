@@ -18,7 +18,7 @@ output:
 
 The goal of this project was to build a Shiny web application that is able to take a sequence of words and predict what the next word is most likely to be. To accomplish such a goal, I built a 5-gram language model using a large corpus of more than 4 million lines of text with a total count of over 100 million words, then used Stupid Backoff algorithm to predict and rank the next word. The resulting model contains more than 5 million unique n-grams and has an accuracy of 13.96 % for top-1 precision and 21.53 % for top-3 precision.
 
-The end product can be found at the following link: [<https://michaeln870.shinyapps.io/WordPrediction/>](https://michaeln870.shinyapps.io/WordPrediction/){.uri}
+The end product can be found at the following link: [\<https://michaeln870.shinyapps.io/WordPrediction/\>](https://michaeln870.shinyapps.io/WordPrediction/){.uri}
 
 In this report, I go through the steps taken to achieving this result, from how I used Spark to clean text and generate n-grams to selecting the right algorithm for the job.
 
@@ -26,17 +26,13 @@ In this report, I go through the steps taken to achieving this result, from how 
 
 The data used for this project comes from a corpora called HC Corpora. It has been collected from publicly available sources by a web crawler and checked for language. Each entry was then tagged based on the type of website it was collected from (Blogs, News or Twitter) and split into individual lines, before removing approximately 50% of it. The current version of the corpus that we will be using can be found at this [link](https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip). Only the English data set will be used for the project, which consist of 3 files that can be summarized as follow:
 
-+-------------------+--------+-------------+----------------+-------------+-----------+---------------------+--------------------+
-|                   | Size   | **Words**   | **Characters** | **Letters** | **Lines** | **Avg Word Length** | **Avg Words/Line** |
-+===================+========+=============+================+=============+===========+=====================+====================+
-| en_US.blogs.txt   | 200 MB | 37,242,000  | 206,824,000    | 163,815,000 | 899,000   | 4.4                 | 41.41              |
-+-------------------+--------+-------------+----------------+-------------+-----------+---------------------+--------------------+
-| en_US.news.txt    | 196 MB | 34,275,000  | 203,223,000    | 162,803,000 | 1,010,000 | 4.75                | 33.93              |
-+-------------------+--------+-------------+----------------+-------------+-----------+---------------------+--------------------+
-| en_US.twitter.txt | 159 MB | 29,876,000  | 162,122,000    | 125,998,000 | 2,360,000 | 4.22                | 12.66              |
-+-------------------+--------+-------------+----------------+-------------+-----------+---------------------+--------------------+
-| **Total**         | 555 MB | 101,393,000 | 572,170,000    | 452,617,000 | 4,269,000 | 4.46                | 23.75              |
-+-------------------+--------+-------------+----------------+-------------+-----------+---------------------+--------------------+
+
+|File              |Size   |Words       |Characters  |Letters     |Lines     |Avg..Word.Length |Avg..Word.Length.1 |
+|:-----------------|:------|:-----------|:-----------|:-----------|:---------|:----------------|:------------------|
+|en_US.blogs.txt   |200 MB |37,242,000  |206,824,000 |163,815,000 |899,000   |4.4              |41.41              |
+|en_US.news.txt    |196 MB |34,275,000  |203,223,000 |162,803,000 |1,010,000 |4.75             |33.93              |
+|en_US.twitter.txt |159 MB |29,876,000  |162,122,000 |125,998,000 |2,360,000 |4.22             |12.66              |
+|                  |555 MB |101,393,000 |572,170,000 |452,617,000 |4,269,000 |4.46             |23.75              |
 
 # 2. Data Preparation
 
@@ -128,13 +124,11 @@ bigrams <- toks %>%
 
 The final model can be summarized as follows:
 
-+--------------------+------------+------------+------------+------------+-----------+-------------+
-|                    | Unigrams   | Bigrams    | Trigrams   | Fourgrams  | Fivegrams |             |
-+====================+============+============+============+============+===========+=============+
-| \# unique n-gram   | 212,965    | 1,510,691  | 2,012,844  | 1,106,633  | 378,469   | 5,221,602   |
-+--------------------+------------+------------+------------+------------+-----------+-------------+
-| Total n-gram count | 98,336,689 | 71,339,756 | 36,394,980 | 12,279,412 | 3,194,251 | 221,545,088 |
-+--------------------+------------+------------+------------+------------+-----------+-------------+
+
+|Measure            |Unigrams   |Bigrams    |Trigrams   |Fourgrams  |Fivegrams |Total       |
+|:------------------|:----------|:----------|:----------|:----------|:---------|:-----------|
+|# unique n-gram    |212,965    |1,510,691  |2,012,844  |1,106,633  |378,469   |5,221,602   |
+|Total n-gram count |98,336,689 |71,339,756 |36,394,980 |12,279,412 |3,194,251 |221,545,088 |
 
 # 3. Exploratory Data Analysis
 
@@ -256,14 +250,10 @@ stupid_backoff <- function(words, alpha = 0.4){
 
 For testing the model, I used the independent [benchmark.R](https://github.com/hfoffani/dsci-benchmark) tool made specifically for benchmarking algorithms developed for this Capstone Project. The tool test prediction accuracy based on a sample of 793 tweets and 599 blog sentences, with a total of 28,658 words. It uses the top-3 prediction from our model to calculate different measures. Here's the result for my model:
 
-|                         |            |
-|-------------------------|------------|
-| Overall top-3 score     | 18.06 %    |
-| Overall top-1 precision | 13.96 %    |
-| Overall top-3 precision | 21.53 %    |
-| Average runtime         | 97.18 msec |
-| Number of predictions   | 28,464     |
-| Total memory used       | 224.63 MB  |
+
+|Overall.top.3.score |Overall.top.1.precision |Overall.top.3.precision |Average.runtime |Number.of.predictions |Total.memory.used |
+|:-------------------|:-----------------------|:-----------------------|:---------------|:---------------------|:-----------------|
+|18.06 %             |13.96 %                 |21.53 %                 |97.18 msec      |28,464                |224.63 MB         |
 
 These results are quite good considering the simplicity of the model and considering that they appear to be above average in comparison to other models from people having previously completed the project. Here's a [forum thread](https://www.coursera.org/learn/data-science-project/discussions/all/threads/1aWTuoCGEeakbhIiKPxV8w) for reference, though it's probably locked for people who aren't enrolled.
 
@@ -287,7 +277,7 @@ While the goal of this project wasn't to build a very effective word prediction 
 
 The final application can be found at the following link: <https://michaeln870.shinyapps.io/WordPrediction/>
 
-![](images/Report%20-%20App.PNG)
+![](Report_files/images/Report%20-%20App.PNG)
 
 **How it works:**
 
