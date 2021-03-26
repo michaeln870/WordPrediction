@@ -1,16 +1,20 @@
-# Capstone Project: Next Word Prediction Application
-
-The goal of this project was the demonstrate the ability to build a next word prediction web application. It is part of the Johns Hopkins University's Data Science Specialization on Coursera.
+# Capstone Project: Next Word Predictor
 
 ### The Application:
 
 https://michaeln870.shinyapps.io/WordPrediction/
 
+### About the project
+
+This project was completed as part of the final deliverable of the [Coursera Data Science Specialization](https://www.coursera.org/specializations/jhu-data-science) from Johns Hopkins University. The goal of which was to demonstrates one's ability to work with new data types and problems by building a Shiny web application that is able to take a sequence of words and predict what the next word is most likely to be.
+
 ### About the model:
 
-The model has been built using a large corpus of more than 4 million lines of text with a total word count of over 102 millions. The corpus has been cleaned and transformed into n-grams up to the fifth order (5-grams). The resulting model is composed of a corpus of more than 15 million n-grams, not accounting for unigrams. The algorithm used to predict the next word is based on the "Stupid Backoff" method.
+The model was built using a large corpus of more than 4 million lines of text in English with a total count of over 100 million words. The corpus has been cleaned and transformed into up to the fifth order (5-grams) and Stupid Backoff was used to predict and rank the next word. The resulting model contains more than 5 million unique n-grams and has an accuracy of 13.96 % for top-1 precision and 21.53 % for top-3 precision.
 
 ### For more detailed information about the project:
-- `Milestone-Report.md`: Report for the first part of the project. It describes the data used, steps for data preparation and some exploratory data analysis.
-- `generating ngrams.ipynb`: R Codes (sparklyr package) to clean and transform a large text corpus into n-grams. Ran on a Spark cluster.
-- `App` folder: R codes to run the application, includes algorithm used to predict next word in `functions.R`
+- `Report.md`: Full report on the project
+- `generating ngrams.ipynb`: R Codes (using sparklyr) to clean and transform a large text corpus into n-grams. Ran on a Spark cluster.
+- `App` folder: R codes to run the application
+  - `functions.R`: algorithm used to predict next word
+  - `App.R`: back-end of the web application 
