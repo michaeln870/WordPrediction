@@ -169,10 +169,8 @@ We can thus interpret from both of these observations that higher degree n-grams
 ## Selecting an algorithm
 
 Now that we have our corpus of n-grams, we can start building the algorithm. The main intuition when building a word prediction model is to find the probability that a word appears given a sequence using its relative frequency count.
-
-$$
-P(fun|I\, am\, having\, a\, lot\, of) = \frac{COUNT(I\, am\, having\, a\, lot\, of)}{COUNT(I\, am\, having\, a\, lot\, of\, fun)}
-$$
+                                   
+P(fun|I am having a lot of) =  COUNT(I am having a lot of) / COUNT(I am having a lot of fun)
 
 This general model is however limited as we can't count every sequences in the whole corpus. This is why we previously generated n-grams. The idea of having n-grams is to calculate the probability that word appears given n previous terms. To do so, there's a simple approaches we can use, such as Markov Chains and Maximum Likelihood Estimation, but these aren't very good at dealing with sequences that aren't in our model. Better approaches add some form of smoothing to the model, which is a way to distribute probability to sequences not previously seen in the model.
 
@@ -184,9 +182,7 @@ The most effective smoothing techniques are Katz Backoff, Kneser-Ney Smoothing a
 
 Stupid Backoff despite its name is quite effective at predicting the next word given a large enough dataset. The idea of this approach is to calculate the relative frequency of word given a sequence of words by starting in the highest order n-gram available and "backing off" to next lowest order if no match was found. We repeat this process until we find a sequence that exist in our model or we backed off to unigrams. For each back off, we discount by an amount alpha, which the recommended value is 0.4.
 
-$$S(w_i|w^{i-1}_{i-k+1}) =  \left\{ \begin{array}{ll}
-         \frac{count(w^i_{i-k+1})}{count(w^{i-1}_{i-k+1})} & \mbox{if $count(w^i_{i-k+1})>0$};\\
-        \alpha S(w_i|w^{i-1}_{i-k+2}) & \mbox{otherwise}.\end{array} \right.$$
+<img src="Report_files/images/stupid-backoff-equation.PNG" />
 
 The result from this equation gives us scores, which can be interpreted in a similar way as a probability, but aren't normalized probabilities.
 
