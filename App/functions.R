@@ -9,13 +9,17 @@ load("./ngrams.RData")
   # [[3]] fougrams
   # [[4]] fivegrams
   # [[5]] unigrams (reduced to top 30)
+# > names(dict[[1]])
+# [1] "firstTerms" "lastTerm"   "n"  
 
-## Clean String, return vector of 4 or less words
+
+## Clean String
+  ## Takes a character string and returns a vector of 4 or less words
 clean_string <- function(string){
   string <- string %>%
     str_trim() %>%
     str_to_lower() %>%
-    str_replace_all("['-]|['-]$|(?<![a-zA-Z])['-]|['-](?![a-zA-Z])","") %>%
+    str_replace_all("^['-]|['-]$|(?<![a-zA-Z])['-]|['-](?![a-zA-Z])","") %>%
     str_replace_all("[^-a-z' ]","") %>%
     str_replace_all("  +"," ") %>%
     str_split(" ")
@@ -25,7 +29,7 @@ clean_string <- function(string){
 }
 
 ## Stupid BackOff
-## Receives a vector of words
+  ## Receives a vector of words
 stupid_backoff <- function(words, alpha = 0.4, recursion = FALSE){ 
   
   n_words <- length(words)
@@ -68,6 +72,9 @@ stupid_backoff <- function(words, alpha = 0.4, recursion = FALSE){
 }
 
 ## main function
+  ## Takes a character string and returns a list containing
+  ## [[1]] tibble of all suggestions with their score
+  ## [[2]] the number of row of the tibble (only used for displaying fancy table in app)
 predict_word <- function(inputString, recursion = FALSE){
   cleaned_input <- clean_string(inputString)
   scores <- stupid_backoff(cleaned_input, recursion=recursion)
