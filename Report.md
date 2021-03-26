@@ -301,4 +301,7 @@ The final application can be found at the following link: <https://michaeln870.s
 
 > **See .Rmd file for all codes**
 
-![](Report_files/figure-html/individual network graphs-1.png)<!-- -->![](Report_files/figure-html/individual network graphs-2.png)<!-- -->![](Report_files/figure-html/individual network graphs-3.png)<!-- -->![](Report_files/figure-html/individual network graphs-4.png)<!-- -->
+<img src="Report_files/figure-html/individual network graphs-1.png" />
+<img src="Report_files/figure-html/individual network graphs-2.png" />
+<img src="Report_files/figure-html/individual network graphs-3.png" />
+<img src="Report_files/figure-html/individual network graphs-4.png" />
